@@ -29,10 +29,13 @@ form {
   font-weight: 800;
 }
 
+/*enabled accelerated CSS following reviewer's suggestions*/
 .mover {
   position: fixed;
   width: 256px;
   z-index: -1;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .randomPizzaContainer {
@@ -51,7 +54,8 @@ form {
 }
 
 
-/*Minimal improvement */
+/*Minimal improvement, then deleted (better to spare the use of transform)
 .movingPizzas1 {
   will-change: transform;
 }
+*/
