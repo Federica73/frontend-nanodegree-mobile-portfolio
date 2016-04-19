@@ -10,7 +10,9 @@
     <!-- Hmm, what is the impact of web fonts on speed? Measure it... Deleted since resulting in ERR_FILE_NOT_FOUND -->
     <!--<link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> -->
     <!--<link href="css/style.css" rel="stylesheet"> -->
-    <link href="css/print.css" rel="stylesheet">
+    <!--media attribute added here with print value -->
+    <link href="css/print.css" rel="stylesheet" media="print">
+    <!--TODO optional inline CSS-->
     <link href="css/style.css" rel="stylesheet">
   </head>
 
@@ -51,6 +53,7 @@
             <p>Who wants a performant pizza?</p>
           </li>
         </ul>
+      </div>
     </div>
 
     <footer>
@@ -65,7 +68,8 @@
       ga('create', 'UA-XXXX-Y');
       ga('send', 'pageview');
     </script>
-    <script src="http://www.google-analytics.com/analytics.js"></script>
+    <<!--async attribute added -->
+    <script async src="http://www.google-analytics.com/analytics.js"></script>
     <script async src="js/perfmatters.js"></script>
   </body>
 </html>
