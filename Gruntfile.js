@@ -3,19 +3,19 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
 //Using Windows7 I got an error for jpg file when using imagemin (write EOF in file)
-//Chosen to use sprites for jpg images: any better solution?
-jpg_sprites: {
-    options: {
-      compression : {
-        type : "JPEG",
-        quality : 100
+//In the end I have converted all the jpg images into png using imagemagik
+    jpg_sprites: {
+      options: {
+        compression : {
+          type : "JPEG",
+          quality : 100
+        }
+      },
+      files: {
+        'src/views/images' : ['dist/views/images/*.jpg'],
+        'src/img' : ['dist/img/*.jpg']
       }
     },
-    files: {
-      'src/views/images' : ['dist/views/images/*.jpg'],
-      'src/img' : ['dist/img/*.jpg']
-    }
-  },
 
 
     imagemin: {
@@ -70,7 +70,8 @@ jpg_sprites: {
           src: ['**/*.css'],
           dest: 'dist/',
           ext: '.css'
-    }]
+        }]
+      }
     },
 
     uglify: {
@@ -81,21 +82,20 @@ jpg_sprites: {
       },
       files: {
         'dist/js/perfmatters.js': 'src/js/perfmatters.js',
-        'dist/views/main.js': 'src/views/main.js',
+        'dist/views/js/main.js': 'src/views/js/main.js',
       }
     }
     },
 
     jshint: {
       all: ['Gruntfile.js']
-  },
-  /* Clear out the dist directory if it exists, not working: No 'clean' target found
+    },
+  /* Clear out the dist directory if it exists, not working: No 'clean' target found */
     clean: {
       dev: {
         src: ['dist'],
       },
-    }, */
-  }
+    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -104,8 +104,7 @@ jpg_sprites: {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-//grunt.loadNpmTasks('grunt-contrib-clean');
-//task clean deleted, since not resolved error
-  grunt.registerTask('default', ['jpg_sprites', 'imagemin', 'htmlmin', 'cssmin', 'uglify', 'jshint']);
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.registerTask('default', ['clean', 'jpg_sprites', 'imagemin', 'htmlmin', 'cssmin', 'uglify', 'jshint']);
 
 };

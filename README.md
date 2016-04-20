@@ -72,7 +72,7 @@ Feeling uninspired by the portfolio? Here's a list of cool portfolios I found af
 * <a href="http://www.roxannecook.com/">http://www.roxannecook.com/</a>
 * <a href="http://www.84colors.com/portfolio.html">http://www.84colors.com/portfolio.html</a>
 
-
+## Before Project review
 1)First improvement:
 Put the script at the end of index.html
 2) Second improvement:
@@ -86,3 +86,7 @@ Summarizing: variables outside the loop, avoid querySelector and use transform.
   will-change: transform;
 }
 4) Using grunt to compress the images, minimize the css files and uglify the js files
+
+##After Project Review
+1) Inserted the comments from reviewer
+2) Converted all the images in png before running grunt, since not able to solve error
