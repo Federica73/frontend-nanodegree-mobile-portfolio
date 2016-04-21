@@ -11,7 +11,48 @@
     <!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> -->
     <!--media attribute added here with print value -->
     <link href="css/print.css" rel="stylesheet" media="print">
-    <link href="css/style.css" rel="stylesheet">
+    <!--inline CSS-->
+    <style>
+      .hero,
+      footer {
+        border-top: 1px solid #ccc
+      }
+      .container,
+      footer,
+      header {
+        max-width: 45em;
+        margin: 0 auto
+      }
+      header {
+        padding: 0 .5em;
+        color: #C90B0B
+      }
+      header img {
+        border-radius: 40px;
+        float: left
+      }
+      header p {
+        font-size: 1.5em;
+        padding-left: 4em
+      }
+      header p span {
+        font-size: .8em;
+        font-weight: 400
+      }
+      .hero {
+        padding: 2em;
+        background-color: #f8f8f8;
+        font-size: 1.2em;
+        border-bottom: 1px solid #ccc
+      }
+      .content {
+        padding: 1em
+      }
+      .content li {
+        list-style-type: none;
+        font-size: 1.1em
+      }
+    </style>
   </head>
 
   <body>
@@ -49,6 +90,8 @@
       ga('create', 'UA-XXXX-Y');
       ga('send', 'pageview');
     </script>
+    <!--insert link to CSS file at the end of page loading-->
+    <link href="css/style.css" rel="stylesheet">
     <script src="http://www.google-analytics.com/analytics.js"></script>
     <script async src="js/perfmatters.js"></script>
   </body>

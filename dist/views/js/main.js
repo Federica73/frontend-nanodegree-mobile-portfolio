@@ -108,12 +108,9 @@ function logAverageFrame(times) {
 
 function updatePositions() {
     frame++, window.performance.mark("mark_start_frame");
-    var i, j, items = document.getElementsByClassName("mover"), itemsLength = items.length, top = document.body.scrollTop, constArray = [];
+    var i, j, phase, items = document.getElementsByClassName("mover"), itemsLength = items.length, top = document.body.scrollTop, constArray = [];
     for (i = 0; 5 > i; i++) constArray.push(Math.sin(top / 1250 + i));
-    for (j = 0; itemsLength > j; j++) {
-        var phase = constArray[j % 5];
-        items[j].style.transform = "translateX(" + 100 * phase + "px)";
-    }
+    for (j = 0; itemsLength > j; j++) phase = constArray[j % 5], items[j].style.transform = "translateX(" + 100 * phase + "px)";
 }
 
 var pizzaIngredients = {};
@@ -165,13 +162,13 @@ var adjectives = [ "dark", "color", "whimsical", "shiny", "noise", "apocalyptic"
     function changeSliderLabel(size) {
         switch (size) {
           case "1":
-            return void (document.querySelector("#pizzaSize").innerHTML = "Small");
+            return void (document.getElementsByID("pizzaSize").innerHTML = "Small");
 
           case "2":
-            return void (document.querySelector("#pizzaSize").innerHTML = "Medium");
+            return void (document.getElementByID("pizzaSize").innerHTML = "Medium");
 
           case "3":
-            return void (document.querySelector("#pizzaSize").innerHTML = "Large");
+            return void (document.getElementByID("#pizzaSize").innerHTML = "Large");
 
           default:
             console.log("bug in changeSliderLabel");
@@ -193,11 +190,11 @@ var adjectives = [ "dark", "color", "whimsical", "shiny", "noise", "apocalyptic"
                 console.log("bug in sizeSwitcher");
             }
         }
-        var oldWidth = elem.offsetWidth, windowWidth = document.querySelector("#randomPizzas").offsetWidth, oldSize = oldWidth / windowWidth, newSize = sizeSwitcher(size), dx = (newSize - oldSize) * windowWidth;
+        var oldWidth = elem.offsetWidth, windowWidth = document.getElementByID("randomPizzas").offsetWidth, oldSize = oldWidth / windowWidth, newSize = sizeSwitcher(size), dx = (newSize - oldSize) * windowWidth;
         return dx;
     }
     function changePizzaSizes(size) {
-        var i, randomPizzasContainer = document.getElementsByID(".randomPizzaContainer"), containerLength = randomPizzasContainer.length, dx = determineDx(randomPizzasContainer[0], size), newwidth = randomPizzasContainer[0].offsetWidth + dx + "px";
+        var i, randomPizzasContainer = document.getElementsByClassName(".randomPizzaContainer"), containerLength = randomPizzasContainer.length, dx = determineDx(randomPizzasContainer[0], size), newwidth = randomPizzasContainer[0].offsetWidth + dx + "px";
         for (i = 0; containerLength > i; i++) randomPizzasContainer[i].style.width = newwidth + "%";
     }
     window.performance.mark("mark_start_resize"), changeSliderLabel(size), changePizzaSizes(size), 
@@ -228,10 +225,11 @@ frame % 10 === 0) {
 }
 
 window.addEventListener("scroll", updatePositions), document.addEventListener("DOMContentLoaded", function() {
-    var i, cols = 8, s = 256, elem = document.createElement("img");
-    document.getElementsByID("movingPizzas1");
-    for (i = 0; 200 > i; i++) elem.className = "mover", elem.src = "images/pizza.png", 
-    elem.style.height = "100px", elem.style.width = "73.333px", elem.basicLeft = i % cols * s, 
-    elem.style.top = Math.floor(i / cols) * s + "px", movingPizzas1.appendChild(elem);
+    var elem, i, cols = 8, s = 256, columns = (document.getElementsByID("movingPizzas1"), 
+    window.innerWidth / 232), rows = window.innerHeight / 300, backgroundPizzas = rows * columns;
+    for (i = 0; backgroundPizzas > i; i++) elem = document.createElement("img"), elem.className = "mover", 
+    elem.src = "images/pizza.png", elem.style.height = "100px", elem.style.width = "73.333px", 
+    elem.style.left = i % cols * s + "px", elem.style.top = Math.floor(i / cols) * s + "px", 
+    movingPizzas1.appendChild(elem);
     updatePositions();
 });

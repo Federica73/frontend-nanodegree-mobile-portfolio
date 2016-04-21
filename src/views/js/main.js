@@ -397,22 +397,23 @@ var pizzaElementGenerator = function(i) {
 
   return pizzaContainer;
 };
-
+//TODO optional: include 'use strict' to enable strict mode
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize");   // User Timing API function
 
   // Changes the value for the size of the pizza above the slider
+  //Following second review, substitutes querySelector with getElementByID
   function changeSliderLabel(size) {
     switch(size) {
       case "1":
-        document.querySelector("#pizzaSize").innerHTML = "Small";
+        document.getElementsByID("pizzaSize").innerHTML = "Small";
         return;
       case "2":
-        document.querySelector("#pizzaSize").innerHTML = "Medium";
+        document.getElementByID("pizzaSize").innerHTML = "Medium";
         return;
       case "3":
-        document.querySelector("#pizzaSize").innerHTML = "Large";
+        document.getElementByID("#pizzaSize").innerHTML = "Large";
         return;
       default:
         console.log("bug in changeSliderLabel");
@@ -424,7 +425,8 @@ var resizePizzas = function(size) {
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
     var oldWidth = elem.offsetWidth;
-    var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
+    //Following second review, substitutes querySelector with getElementByID
+    var windowWidth = document.getElementByID("randomPizzas").offsetWidth;
     var oldSize = oldWidth / windowWidth;
 
     // Optional TODO: change to 3 sizes? no more xl?
@@ -451,8 +453,8 @@ var resizePizzas = function(size) {
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
     //from browser optimization lesson 5 quiz and forum help on for loops
-    //put variables outside for loop and use getElementByID
-    var randomPizzasContainer = document.getElementsByID(".randomPizzaContainer");
+    //put variables outside for loop and use getElementsByClassName instead of getElementByID
+    var randomPizzasContainer = document.getElementsByClassName(".randomPizzaContainer");
     var containerLength = randomPizzasContainer.length;
     var dx = determineDx(randomPizzasContainer[0], size);
     var newwidth = (randomPizzasContainer[0].offsetWidth + dx) + 'px';
@@ -519,12 +521,14 @@ function updatePositions() {
   var constArray = [];
   var i;
   var j;
+  //following second review, defined var phase ouside the for loop
+  var phase;
 
   for (i = 0; i < 5; i++) {
     constArray.push(Math.sin((top / 1250) + i));
   }
   for (j = 0; j < itemsLength; j++) {
-    var phase = constArray[j % 5];
+    phase = constArray[j % 5];
     // use .style.transform rather than .style.left
     items[j].style.transform = "translateX(" + 100 * phase + "px)";
   }
@@ -548,17 +552,23 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  var elem = document.createElement('img');
+//shift the statement back into the for loop
+  var elem;
   var i;
   var movingPizzas = document.getElementsByID("movingPizzas1");
-  //TODO optional define screen instead of displaying 200 pizzas in the visible part of the screen
-  for (i = 0; i < 200; i++) {
-    //var elem = document.createElement('img');
+  //define screen instead of displaying 200 pizzas in the visible part of the screen
+  // 232 is pizza wodth and 3ßß pizza height
+  var columns = window.innerWidth/232
+  var rows = window.innerHeight/300
+  var backgroundPizzas = rows * columns
+  for (i = 0; i < backgroundPizzas; i++) {
+    elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * s;
+    //elem.basicLeft = (i % cols) * s not suitable, since using translateX context of the transform property
+    elem.style.left = (i % cols) * s + 'px';
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     movingPizzas1.appendChild(elem);
   }
