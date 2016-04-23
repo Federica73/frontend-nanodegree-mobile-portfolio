@@ -111,6 +111,11 @@ function updatePositions() {
     var i, j, phase, items = document.getElementsByClassName("mover"), itemsLength = items.length, top = document.body.scrollTop, constArray = [];
     for (i = 0; 5 > i; i++) constArray.push(Math.sin(top / 1250 + i));
     for (j = 0; itemsLength > j; j++) phase = constArray[j % 5], items[j].style.transform = "translateX(" + 100 * phase + "px)";
+    if (window.performance.mark("mark_end_frame"), window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame"), 
+    frame % 10 === 0) {
+        var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
+        logAverageFrame(timesToUpdatePosition);
+    }
 }
 
 var pizzaIngredients = {};
@@ -162,13 +167,13 @@ var adjectives = [ "dark", "color", "whimsical", "shiny", "noise", "apocalyptic"
     function changeSliderLabel(size) {
         switch (size) {
           case "1":
-            return void (document.getElementsByID("pizzaSize").innerHTML = "Small");
+            return void (document.getElementById("pizzaSize").innerHTML = "Small");
 
           case "2":
-            return void (document.getElementByID("pizzaSize").innerHTML = "Medium");
+            return void (document.getElementById("pizzaSize").innerHTML = "Medium");
 
           case "3":
-            return void (document.getElementByID("#pizzaSize").innerHTML = "Large");
+            return void (document.getElementById("pizzaSize").innerHTML = "Large");
 
           default:
             console.log("bug in changeSliderLabel");
@@ -190,7 +195,7 @@ var adjectives = [ "dark", "color", "whimsical", "shiny", "noise", "apocalyptic"
                 console.log("bug in sizeSwitcher");
             }
         }
-        var oldWidth = elem.offsetWidth, windowWidth = document.getElementByID("randomPizzas").offsetWidth, oldSize = oldWidth / windowWidth, newSize = sizeSwitcher(size), dx = (newSize - oldSize) * windowWidth;
+        var oldWidth = elem.offsetWidth, windowWidth = document.getElementById("randomPizzas").offsetWidth, oldSize = oldWidth / windowWidth, newSize = sizeSwitcher(size), dx = (newSize - oldSize) * windowWidth;
         return dx;
     }
     function changePizzaSizes(size) {
@@ -217,15 +222,8 @@ console.log("Time to generate pizzas on load: " + timeToGenerate[0].duration + "
 
 var frame = 0;
 
-if (window.performance.mark("mark_start_frame"), window.performance.mark("mark_end_frame"), 
-window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame"), 
-frame % 10 === 0) {
-    var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
-    logAverageFrame(timesToUpdatePosition);
-}
-
 window.addEventListener("scroll", updatePositions), document.addEventListener("DOMContentLoaded", function() {
-    var elem, i, cols = 8, s = 256, columns = (document.getElementsByID("movingPizzas1"), 
+    var elem, i, cols = 8, s = 256, columns = (document.getElementById("movingPizzas1"), 
     window.innerWidth / 232), rows = window.innerHeight / 300, backgroundPizzas = rows * columns;
     for (i = 0; backgroundPizzas > i; i++) elem = document.createElement("img"), elem.className = "mover", 
     elem.src = "images/pizza.png", elem.style.height = "100px", elem.style.width = "73.333px", 

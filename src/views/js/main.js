@@ -407,13 +407,13 @@ var resizePizzas = function(size) {
   function changeSliderLabel(size) {
     switch(size) {
       case "1":
-        document.getElementsByID("pizzaSize").innerHTML = "Small";
+        document.getElementById("pizzaSize").innerHTML = "Small";
         return;
       case "2":
-        document.getElementByID("pizzaSize").innerHTML = "Medium";
+        document.getElementById("pizzaSize").innerHTML = "Medium";
         return;
       case "3":
-        document.getElementByID("#pizzaSize").innerHTML = "Large";
+        document.getElementById("pizzaSize").innerHTML = "Large";
         return;
       default:
         console.log("bug in changeSliderLabel");
@@ -425,8 +425,8 @@ var resizePizzas = function(size) {
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
     var oldWidth = elem.offsetWidth;
-    //Following second review, substitutes querySelector with getElementByID
-    var windowWidth = document.getElementByID("randomPizzas").offsetWidth;
+    //Following second review, substitutes querySelector with getElementById
+    var windowWidth = document.getElementById("randomPizzas").offsetWidth;
     var oldSize = oldWidth / windowWidth;
 
     // Optional TODO: change to 3 sizes? no more xl?
@@ -532,30 +532,30 @@ function updatePositions() {
     // use .style.transform rather than .style.left
     items[j].style.transform = "translateX(" + 100 * phase + "px)";
   }
-}
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
-  window.performance.mark("mark_start_frame");
+  //Following line removed
+  //window.performance.mark("mark_start_frame");
   window.performance.mark("mark_end_frame");
   window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
   if (frame % 10 === 0) {
     var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
     logAverageFrame(timesToUpdatePosition);
   }
-
-
+//Moved bracket from line 535
+}
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
-//document.getElementsByID("movingPizzas1") defined out of for loop
+//document.getElementById("movingPizzas1") defined out of for loop
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
 //shift the statement back into the for loop
   var elem;
   var i;
-  var movingPizzas = document.getElementsByID("movingPizzas1");
+  var movingPizzas = document.getElementById("movingPizzas1");
   //define screen instead of displaying 200 pizzas in the visible part of the screen
   // 232 is pizza wodth and 3ßß pizza height
   var columns = window.innerWidth/232
