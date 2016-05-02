@@ -107,10 +107,11 @@ function logAverageFrame(times) {
 }
 
 function updatePositions() {
-    frame++, window.performance.mark("mark_start_frame");
-    var i, j, phase, items = document.getElementsByClassName("mover"), itemsLength = items.length, top = document.body.scrollTop, constArray = [];
+    frame++, window.performance.mark("mark_start_frame"), window.items = document.getElementsByClassName("mover"), 
+    window.itemsLength = window.items.length;
+    var i, j, phase, top = document.body.scrollTop, constArray = [];
     for (i = 0; 5 > i; i++) constArray.push(Math.sin(top / 1250 + i));
-    for (j = 0; itemsLength > j; j++) phase = constArray[j % 5], items[j].style.transform = "translateX(" + 100 * phase + "px)";
+    for (j = 0; j < window.itemsLength; j++) phase = constArray[j % 5], window.items[j].style.transform = "translateX(" + 100 * phase + "px)";
     if (window.performance.mark("mark_end_frame"), window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame"), 
     frame % 10 === 0) {
         var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
@@ -224,10 +225,10 @@ var frame = 0;
 
 window.addEventListener("scroll", updatePositions), document.addEventListener("DOMContentLoaded", function() {
     var elem, i, cols = 8, s = 256, columns = (document.getElementById("movingPizzas1"), 
-    window.innerWidth / 232), rows = window.innerHeight / 300, backgroundPizzas = rows * columns;
+    Math.floor(window.innerWidth / 73.333)), rows = Math.floor(window.innerHeight / 100), backgroundPizzas = rows * columns;
     for (i = 0; backgroundPizzas > i; i++) elem = document.createElement("img"), elem.className = "mover", 
     elem.src = "images/pizza.png", elem.style.height = "100px", elem.style.width = "73.333px", 
     elem.style.left = i % cols * s + "px", elem.style.top = Math.floor(i / cols) * s + "px", 
     movingPizzas1.appendChild(elem);
-    updatePositions();
+    window.items = document.querySelectorAll(".mover"), updatePositions();
 });

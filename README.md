@@ -72,7 +72,9 @@ Feeling uninspired by the portfolio? Here's a list of cool portfolios I found af
 * <a href="http://www.roxannecook.com/">http://www.roxannecook.com/</a>
 * <a href="http://www.84colors.com/portfolio.html">http://www.84colors.com/portfolio.html</a>
 
-## Before Project review
+## Overview of code improvements
+
+### Before Project review
 1)First improvement:
 Put the script at the end of index.html
 2) Second improvement:
@@ -87,10 +89,10 @@ Summarizing: variables outside the loop, avoid querySelector and use transform.
 }`
 4) Using grunt to compress the images, minimize the css files and uglify the js files
 
-##After First Project Review
+### After First Project Review
 1) Inserted the comments from reviewer
 2) Converted all the images in png before running grunt, since not able to solve error
-##After Second Project Review
+### After Second Project Review
 1) In-line CSS in index.html
 2) Add vendor prefix in views/css/style
 3) Substitute the overseen `querySelectors` with `getElementByID` in main.js
@@ -98,7 +100,14 @@ Summarizing: variables outside the loop, avoid querySelector and use transform.
 5) Substitute `elem.basicLeft = (i % cols) * s` with `elem.style.left = (i % cols) * s + 'px';` since using translateX context of the transform property
 6) Define screen instead of displaying 200 pizzas in the visible part of the screen
 7) Resize Pizza image with Imagegik: done manually since lacking time, next project I will only use the responsive image app in grunt
+8) Fix typos in main.js
+9) Use window.items in updatePositions function
+10) Recalculating number of pizzas using correct pizza width and heigth
 
 ##How to run the app
 1) The intention is just to show the changes done to improve performance, so just open the files and read the comments
-2) The optimized files are in the dist folder, obtained running the grunt file (simply type grunt in the command line)
+2) The optimized files are in the dist folder, obtained running the grunt file
+### What you need to run grunt
+1) Check all the needed packages in the jason file
+2) Run npm install for all the mentioned packages
+3) Run grunt

@@ -515,8 +515,8 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   //var items = document.querySelectorAll('.mover');
-  var items = document.getElementsByClassName('mover');
-  var itemsLength = items.length;
+  window.items = document.getElementsByClassName('mover');
+  window.itemsLength = window.items.length;
   var top = document.body.scrollTop;
   var constArray = [];
   var i;
@@ -527,10 +527,10 @@ function updatePositions() {
   for (i = 0; i < 5; i++) {
     constArray.push(Math.sin((top / 1250) + i));
   }
-  for (j = 0; j < itemsLength; j++) {
+  for (j = 0; j < window.itemsLength; j++) {
     phase = constArray[j % 5];
     // use .style.transform rather than .style.left
-    items[j].style.transform = "translateX(" + 100 * phase + "px)";
+    window.items[j].style.transform = "translateX(" + 100 * phase + "px)";
   }
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
@@ -557,10 +557,10 @@ document.addEventListener('DOMContentLoaded', function() {
   var i;
   var movingPizzas = document.getElementById("movingPizzas1");
   //define screen instead of displaying 200 pizzas in the visible part of the screen
-  // 232 is pizza wodth and 3ßß pizza height
-  var columns = window.innerWidth/232
-  var rows = window.innerHeight/300
-  var backgroundPizzas = rows * columns
+  //redefine columns and row following forum suggestions
+  var columns = Math.floor(window.innerWidth/73.333);
+  var rows = Math.floor(window.innerHeight/100);
+  var backgroundPizzas = rows * columns;
   for (i = 0; i < backgroundPizzas; i++) {
     elem = document.createElement('img');
     elem.className = 'mover';
@@ -572,5 +572,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     movingPizzas1.appendChild(elem);
   }
+  //added following suggestion in forum
+  window.items = document.querySelectorAll('.mover');
   updatePositions();
 });
