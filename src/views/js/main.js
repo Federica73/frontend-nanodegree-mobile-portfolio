@@ -454,7 +454,8 @@ var resizePizzas = function(size) {
   function changePizzaSizes(size) {
     //from browser optimization lesson 5 quiz and forum help on for loops
     //put variables outside for loop and use getElementsByClassName instead of getElementByID
-    var randomPizzasContainer = document.getElementsByClassName(".randomPizzaContainer");
+    //removed the leading dot from JS Web API call
+    var randomPizzasContainer = document.getElementsByClassName("randomPizzaContainer");
     var containerLength = randomPizzasContainer.length;
     var dx = determineDx(randomPizzasContainer[0], size);
     var newwidth = (randomPizzasContainer[0].offsetWidth + dx) + 'px';
@@ -572,7 +573,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     movingPizzas1.appendChild(elem);
   }
-  //added following suggestion in forum
-  window.items = document.querySelectorAll('.mover');
+  //added following suggestion from forum, substituting querySelectorAll with  document.getElementsByClassName() Web API call
+  window.items = document.getElementsByClassName('mover');
   updatePositions();
 });
