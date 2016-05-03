@@ -103,7 +103,8 @@ Summarizing: variables outside the loop, avoid querySelector and use transform.
 8) Fix typos in main.js
 9) Use window.items in updatePositions function
 10) Recalculating number of pizzas using correct pizza width and heigth
-11) Fiy typo on line 457 and substitute last querySelector on line 577
+11) Fix typo on line 457 and substitute last querySelector on line
+12) Remove % sign on line 467 since using decimal numbers
 
 ##How to run the app
 1) The intention is just to show the changes done to improve performance, so just open the files and read the comments

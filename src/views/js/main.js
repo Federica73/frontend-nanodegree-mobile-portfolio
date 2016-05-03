@@ -455,6 +455,7 @@ var resizePizzas = function(size) {
     //from browser optimization lesson 5 quiz and forum help on for loops
     //put variables outside for loop and use getElementsByClassName instead of getElementByID
     //removed the leading dot from JS Web API call
+    //removed % sign since using decimal numbers
     var randomPizzasContainer = document.getElementsByClassName("randomPizzaContainer");
     var containerLength = randomPizzasContainer.length;
     var dx = determineDx(randomPizzasContainer[0], size);
@@ -463,7 +464,7 @@ var resizePizzas = function(size) {
     for (i = 0; i < containerLength; i++) {
       //var dx = determineDx(randomPizzas[i], size);
       //var newwidth = (randomPizzas)[i].offsetWidth + dx) + 'px';
-      randomPizzasContainer[i].style.width = newwidth + "%";
+      randomPizzasContainer[i].style.width = newwidth;
     }
   }
 

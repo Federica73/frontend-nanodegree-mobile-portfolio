@@ -201,7 +201,7 @@ var adjectives = [ "dark", "color", "whimsical", "shiny", "noise", "apocalyptic"
     }
     function changePizzaSizes(size) {
         var i, randomPizzasContainer = document.getElementsByClassName("randomPizzaContainer"), containerLength = randomPizzasContainer.length, dx = determineDx(randomPizzasContainer[0], size), newwidth = randomPizzasContainer[0].offsetWidth + dx + "px";
-        for (i = 0; containerLength > i; i++) randomPizzasContainer[i].style.width = newwidth + "%";
+        for (i = 0; containerLength > i; i++) randomPizzasContainer[i].style.width = newwidth;
     }
     window.performance.mark("mark_start_resize"), changeSliderLabel(size), changePizzaSizes(size), 
     window.performance.mark("mark_end_resize"), window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
